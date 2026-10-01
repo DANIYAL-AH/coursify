@@ -2,22 +2,38 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { PageHeader } from '@/components/ui/PageHeader'
+import { useThemeStore } from '@/features/theme/theme.store'
 import CreateCourseModal from './CreateCourseModal'
+import PathStudio from './PathStudio'
 import { useCoursesStore } from './courses.store'
 
 export default function CoursesPage() {
   const courses = useCoursesStore((s) => s.courses)
+  const theme = useThemeStore((s) => s.theme)
   const [open, setOpen] = useState(false)
+  const [studio, setStudio] = useState(false)
+  const [draft, setDraft] = useState(1)
   const [query, setQuery] = useState('')
   const shown = courses.filter((c) => c.title.toLowerCase().includes(query.toLowerCase()))
+  const animated = theme === 'animated'
 
   return (
     <>
       <PageHeader
         title="Courses"
         subtitle="Create, organize and monitor all courses and lecture curriculum."
-        action={<Button onClick={() => setOpen(true)}>Create course</Button>}
+        action={
+          <div className="flex gap-2">
+            {animated && (
+              <Button variant="ghost" onClick={() => setStudio(!studio)}>
+                {studio ? 'Hide path studio' : 'Draw path studio'}
+              </Button>
+            )}
+            <Button onClick={() => { setDraft(1); setOpen(true) }}>Create course</Button>
+          </div>
+        }
       />
+      {animated && studio && <PathStudio onCreate={(n) => { setDraft(n); setOpen(true) }} />}
       <input className="field mb-4 max-w-sm" placeholder="Search courses" aria-label="Search courses" value={query} onChange={(e) => setQuery(e.target.value)} />
       {shown.length === 0 && <Card className="text-mute">No courses match your search.</Card>}
       <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4 lg:gap-4">
@@ -34,7 +50,7 @@ export default function CoursesPage() {
           </Card>
         ))}
       </div>
-      <CreateCourseModal open={open} onClose={() => setOpen(false)} />
+      <CreateCourseModal open={open} onClose={() => setOpen(false)} initialLectures={draft} />
     </>
   )
 }

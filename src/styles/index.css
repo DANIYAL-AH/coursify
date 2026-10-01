@@ -47,3 +47,9 @@
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* smooth flow: dialogs pop in, pages fade up */
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(8px); } }
+dialog[open] { animation: pop 0.18s ease-out; }
+.page-in { animation: fade-up 0.28s ease-out; }

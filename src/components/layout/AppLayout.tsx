@@ -31,9 +31,11 @@ export default function AppLayout() {
       <div className="min-w-0 flex-1">
         <Topbar onMenu={() => setOpen(true)} onSearch={() => setPalette(true)} />
         <main id="main" tabIndex={-1} className="mx-auto w-full max-w-[1500px] p-4 outline-none sm:p-6 lg:p-7">
-          <Suspense fallback={<PageSkeleton />}>
-            <Outlet />
-          </Suspense>
+                    <div key={pathname} className="page-in">
+            <Suspense fallback={<PageSkeleton />}>
+              <Outlet />
+            </Suspense>
+          </div>
         </main>
       </div>
       <CommandPalette open={palette} onClose={() => setPalette(false)} />
