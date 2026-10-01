@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+@import './themes.css';
+
+@theme inline {
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-line: var(--line);
+  --color-side: var(--side);
+  --color-sideink: var(--sideink);
+  --color-accent: var(--accent);
+}
+
+@layer base {
+  body {
+    background: var(--bg);
+    background-attachment: fixed;
+    color: var(--ink);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+}
+
+@layer components {
+  .surface {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(var(--blur));
+  }
+  .topbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(var(--blur));
+  }
+  .field {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

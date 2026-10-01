@@ -1,0 +1,22 @@
+/* Each "view" only changes these variables. Components never change. */
+:root { --accent: #2563eb; --r: 12px; --blur: 0px; }
+
+[data-theme='professional'] {
+  --bg: #f5f7fa; --card: #ffffff; --ink: #0f1b2d; --mute: #5b6b82; --line: #e2e8f0;
+  --side: #0c2340; --sideink: #c9d6e8; --shadow: 0 1px 2px rgba(15, 27, 45, 0.06);
+}
+[data-theme='cool'] {
+  --bg: radial-gradient(1200px 600px at 80% -10%, #3b1d6e 0, #0b0f1e 55%);
+  --card: rgba(255, 255, 255, 0.06); --ink: #eef0ff; --mute: #a4acd0; --line: rgba(255, 255, 255, 0.12);
+  --side: rgba(10, 14, 30, 0.6); --sideink: #b7bedf; --shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --r: 18px; --blur: 14px;
+}
+[data-theme='animated'] {
+  --bg: #fff7ed; --card: #ffffff; --ink: #2b1a0e; --mute: #7a5f48; --line: #f3dcc4;
+  --side: #2b1a0e; --sideink: #f3dcc4; --shadow: 0 6px 0 #f3dcc4; --r: 20px;
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+[data-theme='animated'] .surface { animation: rise 0.5s backwards; transition: transform 0.2s; }
+[data-theme='animated'] .surface:hover { transform: translateY(-3px) rotate(-0.4deg); }
+[data-theme='cool'] .surface:hover { border-color: var(--accent); }

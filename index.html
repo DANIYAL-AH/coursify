@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" data-theme="professional">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Edu Admin - learning management dashboard" />
+    <title>Edu Admin</title>
+    <script>
+      try {
+        var s = JSON.parse(localStorage.getItem('ea-theme')).state
+        document.documentElement.dataset.theme = s.theme
+        document.documentElement.style.setProperty('--accent', s.accent)
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
